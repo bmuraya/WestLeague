@@ -19,6 +19,7 @@
 
 
     <link rel="stylesheet" href=" {{ asset('css/styles.css') }}" type="text/css"/>
+    <link rel="stylesheet" href=" {{ asset('css/form.css') }}" type="text/css"/>
 
     @stack("styles")
 </head>
@@ -86,7 +87,7 @@
                             <li>
                                 <div class="header-club-logos_inner">
                                     <a href="inside.html" class="header-club-logos_inner">
-                                        <div class="header-club-logos_logo"> <img src="{{ asset('img/log13.pn')}}g"></div>
+                                        <div class="header-club-logos_logo"> <img src="{{ asset('img/log13.png')}}"></div>
 
                                     </a>
 
@@ -122,7 +123,7 @@
                             <li>
                                 <div class="header-club-logos_inner">
                                     <a href="#" class="header-club-logos_inner">
-                                        <div class="header-club-logos_logo"> <img src="{{ asset('img/Kaizer C')}}hiefs.png"></div>
+                                        <div class="header-club-logos_logo"> <img src="{{ asset('img/Kaizer Chiefs.png')}}"></div>
 
                                     </a>
 

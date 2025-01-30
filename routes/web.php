@@ -15,6 +15,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/team', [UserController::class, 'Team'])->name('user.team');
 });
 
 Route::middleware('auth', AuthAdmin::class)->group(function () {
