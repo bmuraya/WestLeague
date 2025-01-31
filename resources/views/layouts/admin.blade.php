@@ -80,13 +80,47 @@
                                         </li>
                                     </ul>
                                 </li>
-                                
-                                <li class="menu-item">
-                                    <a href="users.html" class="">
-                                        <div class="icon"><i class="icon-user"></i></div>
-                                        <div class="text">User</div>
+
+
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-book"></i></div>
+                                        <div class="text">Posts</div>
                                     </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('posts.create') }}" class="">
+                                                <div class="text">New Post</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('posts.index') }}" class="">
+                                                <div class="text">Post</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
+                                
+
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-layers"></i></div>
+                                        <div class="text">Categories</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('categories.create') }}" class="">
+                                                <div class="text">New Categories</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('categories.store') }}" class="">
+                                                <div class="text">Categories</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            
 
                                 <li class="menu-item">
                                     <a href="settings.html" class="">
