@@ -34,7 +34,10 @@
                  </div>
                  <div class="wg-table table-all-user">
                      <table class="table table-striped table-bordered">
-                         <thead>
+                         
+                        @if($categories->count()>0)
+                        
+                        <thead>
                              <tr>
 
                                  <th>Name</th>
@@ -79,6 +82,14 @@
 
                         </tbody>
                      </table>
+
+                     @else
+
+                    
+                     <h3  class="text-center">No Category found</h3>
+            
+                    
+                 @endif
                  </div>
                  <div class="divider"></div>
                  <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">

@@ -26,6 +26,7 @@ Route::middleware('auth', AuthAdmin::class)->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('categories', CatergoriesController::class);
     Route::resource('posts', PostController::class);
+    Route::get('trashed-posts', [PostController::class, 'trashed'])->name('trashed-posts.index');
     
 
    

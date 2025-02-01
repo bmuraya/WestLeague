@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Posts\CreatePostRequest;
 use App\Models\Post;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,12 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        // Fetch all posts from the database
-        $posts = Post::all();
-    
-        // Pass the posts to the view
-        return view('posts.index', compact('posts'));
+        return view('posts.index')->with('posts', Post::all());
+     
+ 
     }
+    
     
 
     /**
@@ -86,8 +86,39 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($id)
+{
+    $post = Post::withTrashed()->where('id', $id)->firstOrFail();
+
+    if ($post->trashed()) {
+        // Get the full image path
+       
+        Storage::delete('public/' . $post->image);
+
+      
+        // Permanently delete the post
+        $post->forceDelete();
+
+    } else {
+        // Move the selected post to the trash (soft delete)
+        $post->delete();
     }
+
+    session()->flash('success', 'Post Deleted successfully');
+
+    return redirect(route('posts.index'));
+}
+
+    
+
+    /**
+     * Display a listing of trashed posts.
+     */
+
+     public function trashed()
+     {
+         $trashed = Post::onlyTrashed()->get();
+
+         return view('posts.index')->withPosts($trashed);
+     }
 }

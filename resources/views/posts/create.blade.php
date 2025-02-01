@@ -51,6 +51,7 @@
                 <fieldset class="shortdescription">
                     <div class="body-title mb-10">Short Description <span
                             class="tf-color-1">*</span></div>
+                            {{-- TinyMCE or CKEditor --}}
                     <textarea class="mb-10 ht-150" name="description" id="description"
                         placeholder="Short Description" tabindex="0" aria-required="true"
                         required></textarea>
@@ -61,6 +62,7 @@
                 <fieldset class="description">
                     <div class="body-title mb-10">Content <span class="tf-color-1">*</span>
                     </div>
+                    {{-- TinyMCE or CKEditor --}}
                     <textarea class="mb-10" name="content" id="content" placeholder=" Full Content"
                         tabindex="0" aria-required="true" required></textarea>
                     <div class="text-tiny">Do not exceed 500 characters when entering the
@@ -95,6 +97,7 @@
                     <fieldset class="name">
                         <div class="body-title mb-10">published at <span
                                 class="tf-color-1">*</span></div>
+                                {{-- TinyMCE or CKEditor --}}
                         <input class="mb-10" type="text" placeholder="Date published"
                             name="published_at" id="published_at"  value="" aria-required="true"
                             required>
@@ -120,3 +123,52 @@
 
 
 @endsection
+
+@section('css')
+
+
+<!-- Trix CSS -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+
+<style>
+    .note-icon {
+        font-size: 20px !important;
+    }
+    
+    .note-btn {
+        padding: 5px !important;
+    }
+    
+    .note-btn i {
+        font-size: 20px !important;
+    }
+</style>
+
+@endsection
+
+
+
+@section('scripts')
+
+<!-- Trix JS -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+
+
+ <script>
+        $(document).ready(function() {
+            $('#content').summernote({
+                height: 300,   // Adjust height as needed
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture']]
+                ]
+            });
+        });
+    </script>
+
+
+@endsection
+
+

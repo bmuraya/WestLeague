@@ -33,7 +33,10 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
-                        <thead>
+                       
+
+                          @if($posts->count()>0)
+                          <thead>
 
 
                             <tr>
@@ -43,33 +46,63 @@
 
                                 <th>Action</th>
                             </tr>
-                        </thead>
+                                </thead>
                         <tbody>
-                            @foreach ($posts as $post)
-                                <tr>
-                                    <td><img src="{{ asset('storage/' . $post->image) }}" style="width: 150px; height: auto;" alt="Post Image">
-                                    </td>
 
-                                    <td> {{ $post->title }} </td>
+                          @foreach ($posts as $post)
+                          <tr>
+                              <td>
+                                  <img src="{{ asset('storage/' . $post->image) }}" style="width: 150px; height: auto;" alt="Post Image">
+                              </td>
+                  
+                              <td>{{ $post->title }}</td>
+                  
+                              <td>
+                                  <div class="list-icon-function">
+                                      @if (!$post->trashed())
+                                          <!-- Check if the post is NOT trashed -->
+                                          <a href="{{ route('posts.edit', $post->id) }}">
+                                              <div class="item edit">
+                                                  <i class="icon-edit-3"></i>
+                                              </div>
+                                          </a>
+                                      @endif
 
-                                    <td>
-                                        <div class="list-icon-function">
+                                      <!-- Conditional Form for Delete or Trash -->
+                                      @if ($post->trashed())
+                                          <!-- If post is trashed, show delete icon for permanent deletion -->
+                                          <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                              onsubmit="return confirm('Are you sure you want to permanently delete this post?');">
+                                              @csrf
+                                              @method('DELETE')
+                                              <div class="item text-danger delete">
+                                                  <button type="submit" class="item text-danger delete"
+                                                      style="background: none; border: none; padding: 0;">
+                                                      <i class="icon-trash"></i> <!-- Delete Icon -->
+                                                  </button>
+                                              </div>
+                                          </form>
+                                      @else
+                                          <!-- If post is not trashed, show trash icon for soft deletion -->
+                                          <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                              onsubmit="return confirm('Are you sure you want to trash this post?');">
+                                              @csrf
+                                              @method('DELETE')
+                                              <div class="item text-danger delete">
+                                                  <button type="submit" class="item text-danger delete"
+                                                      style="background: none; border: none; padding: 0;">
+                                                      <i class="icon-trash-2"></i> <!-- Trash Icon -->
+                                                  </button>
+                                              </div>
+                                          </form>
+                                      @endif
+                                  </div>
+                              </td>
+                          </tr>
+                      @endforeach
 
-                                            <a href="#">
-                                                <div class="item edit">
-                                                    <i class="icon-edit-3"></i>
-                                                </div>
-                                            </a>
-                                            <form action="#" method="POST">
-                                                <div class="item text-danger delete">
-                                                    <i class="icon-trash-2"></i>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-
+                     
+                        
 
 
 
@@ -78,6 +111,14 @@
 
                         </tbody>
                     </table>
+
+                    @else
+
+                    
+                    <h3  class="text-center">No posts found</h3>
+           
+                   
+                @endif
                 </div>
 
                 <div class="divider"></div>
